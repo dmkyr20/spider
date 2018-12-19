@@ -113,3 +113,44 @@ void setup() {
 
 Варнинг – Будьте внимательны при создании ног передаются копии элементов а не их ссылка поэтому стоит позаботиться о том чтоб лишнее объекты ног, если они уже записаны в Spider, были уничтожены.
 
+#### Методы
+1. setLegs (Устанавливает ноги)
+```C++
+#include <Spider.h>
+
+Spider mySpider;
+ 
+void setup() {
+  Leg rightTop(15, 16, 17, 90, 130, 115, 'r');
+  Leg leftTop(2, 1, 0, 90, 55, 60, 'l'); 
+  Leg rightCenter(12, 13, 14, 95, 130, 130, 'r');
+  Leg leftCenter(5, 4, 3, 90, 50, 40, 'l');
+  Leg rightBottom(6, 7, 8, 90, 130, 90, 'r');
+  Leg leftBottom(9, 10, 11, 90, 40, 50, 'l'); 
+  mySpider = Spider(leftTop, leftCenter, leftBottom, rightTop, rightCenter, rightBottom);
+  mySpider.setLegs(leftTop, leftCenter, leftBottom, rightTop, rightCenter, rightBottom);
+}
+```
+2. moving (На вход принимает структуру Mover – структура которая хранит внутри себя углы для каждой ноги)
+```C++
+#include <Spider.h>
+
+Spider mySpider;
+ 
+void setup() {
+  Serial.begin(9600); 
+  Leg rightTop(15, 16, 17, 90, 130, 115, 'r');
+  Leg leftTop(2, 1, 0, 90, 55, 60, 'l'); 
+  Leg rightCenter(12, 13, 14, 95, 130, 130, 'r');
+  Leg leftCenter(5, 4, 3, 90, 50, 40, 'l');
+  Leg rightBottom(6, 7, 8, 90, 130, 90, 'r');
+  Leg leftBottom(9, 10, 11, 90, 40, 50, 'l'); 
+  mySpider = Spider(leftTop, leftCenter, leftBottom, rightTop, rightCenter, rightBottom);
+}
+
+void crouch(int del = 200) {
+  mySpider.moving(MOVE_CROUCH);
+  delay(del);
+  mySpider.moving(MOVE_STANDUP);
+}
+```
