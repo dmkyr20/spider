@@ -61,5 +61,25 @@ void setup() {
   b.moving({1, 60, 70});
 }
 ```
-4.	getCurentAngle – возвращает угл в котором находиться нога в данны момент
-5.	getStaticAngle – возвращает стандартные углы для ноги
+4.	getCurentAngle (возвращает Angle в котором находиться нога в данный момент)
+```C++
+#include <Leg.h>
+
+void setup() {
+  Leg b(15, 16, 17, 90, 130, 115, 'r');
+  // const Angle LEG_DOWN = {1, -30, 70}; - Стандартная константа
+  b.moving(LEG_DOWN);
+  Angle a = b.getCurentAngle();
+}
+```
+5.	getStaticAngle (возвращает стандартные углы для ноги)
+```C++
+#include <Leg.h>
+
+void setup() {
+  Leg b(15, 16, 17, 90, 130, 115, 'r');
+  // const Angle LEG_DOWN = {1, -30, 70}; - Стандартная константа
+  b.moving(LEG_DOWN);
+  Angle a = b.getStaticAngle();
+}
+```
