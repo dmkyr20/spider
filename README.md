@@ -83,3 +83,8 @@ void setup() {
   Angle a = b.getStaticAngle();
 }
 ```
+
+### Spider
+```C++
+#include <Spider.h>
+```
