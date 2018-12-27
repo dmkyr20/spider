@@ -1,25 +1,23 @@
-# Библиотека Spider
-Библиотека создана для простых программ на Arduino с использованием [Multiservo shield](https://github.com/amperka/Multiservo) для управления одновременно 18-тю сервоприводами которые являются частями ног робота. Рассчитано что у робота есть 6 ног с 3-мя степенями свободы(То есть за движение каждой ноги отвечают 3 сервопривода).
+# Arduino library - Spider
+This library was created for simple Arduino projects with the use of Multiservo shield for controlling at the same time all 18 servos, which are parts of the robot's legs. Supposed, that the robot has 6 legs with 3 degrees of freedom each (meaning, that 3 servos are responsible for each leg's movement).
 
-## Начало работы
-Библиотека рассчитана на Multiservo shield и основывается на их библиотеке. Поэтому для работы данной библиотеки необходимо предварительно установить библиотеку Multiservo. 
+## Beginning of work 
+The library is designed for Multiservo shield and is based on their library. Therefore, it is necessary to download their library before starting the work. The library can be installed as shown below, previously downloading it as an archive.
 
-Добавление библиотеки можно сделать следующим образом предварительно скачав их в как архив
+![Eng](https://github.com/Antrismus/Spider/blob/master/Illustration/Eng.png)
 
-![Rus](https://github.com/Antrismus/Spider/blob/master/Illustration/Rus.png)
-
-## Библиоткека
-В библиотеке есть два класса, первый это Leg для характеристики и управление каждой ноги отдельно и второй класс Spider который соответственно управляет пауком в целом.
+## Library 
+The library contains 2 classes - "Legs" for separate control and characteristic of each leg and "Spider" which controls the whole robot's body.
 
 ### Leg
 ```C++
 #include <Leg.h>
 ```
-Класс Leg, как уже говорилось ранее класс создан для управления ногой робота. Нога должна складываться с трех моторов (Бедро – верхний сервопривод, Колено – средний сервопривод, Ступня – нижний сервопривод)
+As said, class "Leg" is used for controlling movements of robot's leg. Each leg is composed of 3 motors (hip - upper servo, knee -middle servo, foot - lower servo).
 
-#### Конструктор
-1. Пустая нога
-2. Инициалиизация ноги при создании
+#### Constructor 
+1. Empty leg 
+2. leg initialization during the creation
 
 ```C++
 #include <Leg.h>
@@ -30,8 +28,8 @@ void setup() {
 }
 ```
 
-#### Методы
-1.	setupStaticAngle (Установить стандартные углы поворота для ноги)
+#### Methods
+1.	setupStaticAngle (setting standard angles for the leg)
 ```C++
 #include <Leg.h>
 
@@ -40,7 +38,7 @@ void setup() {
   b.setupStaticAngle(90, 130, 115);
 }
 ```
-2.	setupSide (Устанавливает сторону ноги)
+2.	setUpside (setting leg's side)
 ```C++
 #include <Leg.h>
 
@@ -49,8 +47,8 @@ void setup() {
   b.setupSide('l');
 }
 ```
-3.	moving (Ставит ногу в определенное положение с помещу структуры Angle) 
-Структура Angle состоит из трех углов соответственно по углу на каждый сервопривод
+3.	moving (putting the leg in a specific position with the help of Angle structure).
+Angle structure is made up of 3 angles (1 angle for each servo).
 ```C++
 #include <Leg.h>
 
@@ -61,7 +59,7 @@ void setup() {
   b.moving({1, 60, 70});
 }
 ```
-4.	getCurentAngle (возвращает Angle в котором находиться нога в данный момент)
+4.	getCurrentAngle (getting back the angle in which leg is at the moment)
 ```C++
 #include <Leg.h>
 
@@ -72,7 +70,7 @@ void setup() {
   Angle a = b.getCurentAngle();
 }
 ```
-5.	getStaticAngle (возвращает стандартные углы для ноги)
+5.	get StaticAngle (getting back standard leg's angle)
 ```C++
 #include <Leg.h>
 
@@ -88,13 +86,13 @@ void setup() {
 ```C++
 #include <Spider.h>
 ```
-Класс которые объединят 6 ног в паука
+The class which connects all 6 spider's legs
 
-#### Конструктор
-1. Инициализация объекта  ногами.
-2. С помощю структуры SpiderAdapter.
-SpiderAdapter это структура которая содержит ноги которые мы можем переопределить в паука.
-3. Создание объекта.
+#### Constructor 
+1. Initialization of object using legs 
+2. Using SpiderAdapter structure.
+This structure contains legs which then we can redefine into a spider
+3. Object's creation 
 ```C++
 #include <Spider.h>
 
@@ -111,10 +109,10 @@ void setup() {
 }
 ```
 
-Варнинг – Будьте внимательны при создании ног передаются копии элементов а не их ссылка поэтому стоит позаботиться о том чтоб лишнее объекты ног, если они уже записаны в Spider, были уничтожены.
+Warning: Be careful - during the legs' creation copies of elements are transmitted, not their links. Therefore, you have to make sure that you erase all extra legs' objects if they are already written in the Spider. 
 
-#### Методы
-1. setLegs (Устанавливает ноги)
+#### Methods
+1. setLegs (installing legs)
 ```C++
 #include <Spider.h>
 
@@ -131,7 +129,7 @@ void setup() {
   mySpider.setLegs(leftTop, leftCenter, leftBottom, rightTop, rightCenter, rightBottom);
 }
 ```
-2. moving (На вход принимает структуру Mover – структура которая хранит внутри себя углы для каждой ноги)
+2. moving (takes Mover structure as an argument. This structure keeps inside all angles for each leg)
 ```C++
 #include <Spider.h>
 
